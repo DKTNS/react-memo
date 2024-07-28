@@ -246,7 +246,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
         </div>
         {status === STATUS_IN_PROGRESS ? (
           <>
-            {isGameMode === "true" ? (
+            {isGameMode === "false" ? (
               <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
             <ToolTipComponent text={"Случайная пара карт."} customClass={styles.toolTipCustom}>
