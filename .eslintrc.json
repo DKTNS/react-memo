@@ -2,9 +2,10 @@
   "extends": ["eslint:recommended", "prettier", "react-app", "react-app/jest"],
   "plugins": ["prettier"],
   "rules": {
-    "camelcase": ["error", { "properties": "never" }],
+    "camelcase": ["error", { "endOfLine": "auto" }],
     "prettier/prettier": "error",
     "eqeqeq": ["error", "always"],
     "no-unused-vars": ["error"]
   }
 }
+//{ "properties": "never" }
