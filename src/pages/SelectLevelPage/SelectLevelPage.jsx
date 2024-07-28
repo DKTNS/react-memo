@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
 import Checkbox from "../../components/CheckBox/CheckBox";
 
+// Создаем контекст
+// const ModeContext = createContext();
+// // Компонент-провайдер контекста
+// export function ModeProvider({ children }) {
+//   const [isEasyMode, setIsEasyMode] = useState(false);
+// }
+
 export function SelectLevelPage() {
   return (
     <div className={styles.container}>
