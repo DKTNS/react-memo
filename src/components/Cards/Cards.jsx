@@ -6,8 +6,7 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import ToolTipComponent from "../ToolTip/ToolTipComponent";
-import iconCard from "../Cards/iconCard.svg";
-
+import iconCard from "../Cards/icons/iconCard.svg";
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
 const STATUS_WON = "STATUS_WON";
@@ -67,6 +66,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
   const minusOneAttempt = () => {
     setNumberOfAttempts(numberOfAttempts - 1);
   };
+
   function finishGame(status = STATUS_LOST) {
     setGameEndDate(new Date());
     setStatus(status);
@@ -83,6 +83,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
+    setNumberOfAttempts(2);
+    setAchievements(prevState => prevState.filter(achieve => achieve !== 2));
   }
 
   /**
@@ -136,21 +138,22 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
     const playerLost = openCardsWithoutPair.length >= 2;
 
     // "Игрок проиграл", т.к на поле есть две открытые карты без пары
-    if (playerLost) {
-      finishGame(STATUS_LOST);
-      return;
-    }
-
+    // if (playerLost) {
+    //   finishGame(STATUS_LOST);
+    //   return;
+    // }
     // ... игра продолжается
-    if (playerLost) {
-      minusOneAttempt();
-      if (numberOfAttempts < 1) {
-        finishGame(STATUS_LOST);
-        return;
-      } else {
-        setTimeout(() => {
-          setCards(cards.map(card => (openCardsWithoutPair.includes(card) ? { ...card, open: false } : card)));
-        }, 1000);
+    if (isGameMode === "true") {
+      if (playerLost) {
+        minusOneAttempt();
+        if (numberOfAttempts < 1) {
+          finishGame(STATUS_LOST);
+          return;
+        } else {
+          setTimeout(() => {
+            setCards(cards.map(card => (openCardsWithoutPair.includes(card) ? { ...card, open: false } : card)));
+          }, 1000);
+        }
       }
     } else {
       if (playerLost) {
@@ -167,7 +170,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
       alert("Подсказкой можно воспользоваться только 1 раз");
       return;
     }
-
     let closedCards = cards.filter(card => !card.open);
     closedCards = shuffle(closedCards);
     closedCards[0].open = true;
@@ -178,6 +180,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
     });
     setAchievements(prevState => [...prevState, 2]);
   };
+
   // Игровой цикл
   useEffect(() => {
     // В статусах кроме превью доп логики не требуется
@@ -213,7 +216,11 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
       clearInterval(intervalId);
     };
   }, [gameStartDate, gameEndDate]);
-
+  useEffect(() => {
+    if (!isGameMode) {
+      setAchievements(prevState => [...prevState, 1]);
+    }
+  }, [isGameMode]);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -242,13 +249,12 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             {isGameMode === "true" ? (
               <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
-            <ToolTipComponent text={"Случайная пара"} customClass={styles.toolTipCustom}>
-              <img className={styles.iconBtn} alt="Открыть пару карточек" src={iconCard} onClick={acheevka} />
+            <ToolTipComponent text={"Случайная пара карт."} customClass={styles.toolTipCustom}>
+              <img className={styles.iconBtn} src={iconCard} alt="Открыть пару кар" onClick={acheevka} />
             </ToolTipComponent>
             <Button onClick={resetGame}>Начать заново</Button>
           </>
         ) : null}
-        {/* {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null} */}
       </div>
 
       <div className={styles.cards}>
@@ -270,6 +276,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
+            isGameMode={isGameMode}
           />
         </div>
       ) : null}
