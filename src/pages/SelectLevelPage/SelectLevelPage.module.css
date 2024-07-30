@@ -62,3 +62,29 @@
 .levelLink:visited {
   color: #0080c1;
 }
+.easyMode {
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  font-size: 20px;
+
+}
+.easyMode::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 12px;
+  height: 12px;
+  background-color: blue;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+.checkbox-input {
+  display: none;
+  &:checked + label .checkbox {
+    &:after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}

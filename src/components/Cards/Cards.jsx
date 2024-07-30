@@ -256,7 +256,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
             {isGameMode === "true" ? (
               <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
-            <ToolsComponent text={"Алохомора! Открывается случайная пара карт."} customClass={styles.toolTipCustom}>
+            <ToolsComponent text={"Алохомора! Открывается случайная пара карт."} customClass={styles.toolsCustom}>
               <img className={styles.iconBtn} src={CardsIcon} alt="Открыть пару карточек" onClick={alohomora} />
             </ToolsComponent>
             <Button onClick={resetGame}>Начать заново</Button>

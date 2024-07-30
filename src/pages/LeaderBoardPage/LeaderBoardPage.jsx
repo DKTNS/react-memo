@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { getLeaders } from "../../api";
-import NoAchiv1 from "../../icons/NoAchiv1.svg";
-import GetAchiv1 from "../../icons/GetAchiv1.svg";
-import NoAchiv2 from "../../icons/NoAchiv2.svg";
-import GetAchiv2 from "../../icons/GetAchiv2.svg";
 import ToolsComponent from "../../components/Tools/ToolsComponent";
+import iconCardMinus from "./imgLeader/iconCardMinus.svg";
+import iconCardPlus from "./imgLeader/iconCardPlus.svg";
 
 export function LeaderBoardPage() {
   const [leaders, setLeaders] = useState([]);
@@ -47,18 +45,18 @@ export function LeaderBoardPage() {
                 <div className={styles.nameBox}>{leader.name}</div>
                 <div className={styles.achivBox}>
                   {leader.achievements.includes(1) ? (
-                    <ToolsComponent text={"Игра пройдена в сложном режиме"} customClass={styles.toolTipCustom}>
-                      <img className={styles.iconBtn} src={GetAchiv1} alt="Игра пройдена в сложном режиме" />
+                    <ToolsComponent text={"Игра пройдена в сложном режиме"} customClass={styles.toolsCustom}>
+                      <img className={styles.iconBtn} src={iconCardPlus} alt="Игра пройдена в сложном режиме" />
                     </ToolsComponent>
                   ) : (
-                    <img className={styles.iconBtn} src={NoAchiv1} alt="Легкий режим использовался" />
+                    <img className={styles.iconBtn} src={iconCardMinus} alt="Легкий режим использовался" />
                   )}
                   {leader.achievements.includes(2) ? (
-                    <ToolsComponent text={"Игра пройдена без супер-сил"} customClass={styles.toolTipCustom}>
-                      <img className={styles.iconBtn} src={GetAchiv2} alt="Игра пройдена без супер-сил" />
+                    <ToolsComponent text={"Игра пройдена без супер-сил"} customClass={styles.toolsCustom}>
+                      <img className={styles.iconBtn} src={iconCardMinus} alt="Игра пройдена без супер-сил" />
                     </ToolsComponent>
                   ) : (
-                    <img className={styles.iconBtn} src={NoAchiv2} alt="Суперсилы использовались" />
+                    <img className={styles.iconBtn} src={iconCardPlus} alt="Суперсилы использовались" />
                   )}
                 </div>
                 <div>
