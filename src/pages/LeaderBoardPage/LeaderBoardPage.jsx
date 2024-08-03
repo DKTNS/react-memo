@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { getLeaders } from "../../api";
-import ToolsComponent from "../../components/Tools/ToolsComponent";
-import iconCardMinus from "./imgLeader/iconCardMinus.svg";
-import iconCardPlus from "./imgLeader/iconCardPlus.svg";
 
 export function LeaderBoardPage() {
   const [leaders, setLeaders] = useState([]);
@@ -32,7 +29,6 @@ export function LeaderBoardPage() {
         <div className={styles.leadersItemTitle}>
           <div>Позиция</div>
           <div>Пользователь</div>
-          <div>Достижения</div>
           <div>Время</div>
         </div>
         {leaders
@@ -43,22 +39,6 @@ export function LeaderBoardPage() {
               <li className={styles.leadersItem} key={leader.id}>
                 <div className={styles.numberBox}># {i++}</div>
                 <div className={styles.nameBox}>{leader.name}</div>
-                <div className={styles.achivBox}>
-                  {leader.achievements.includes(1) ? (
-                    <ToolsComponent text={"Игра пройдена в сложном режиме"} customClass={styles.toolsCustom}>
-                      <img className={styles.iconBtn} src={iconCardPlus} alt="Игра пройдена в сложном режиме" />
-                    </ToolsComponent>
-                  ) : (
-                    <img className={styles.iconBtn} src={iconCardMinus} alt="Легкий режим использовался" />
-                  )}
-                  {leader.achievements.includes(2) ? (
-                    <ToolsComponent text={"Игра пройдена без супер-сил"} customClass={styles.toolsCustom}>
-                      <img className={styles.iconBtn} src={iconCardMinus} alt="Игра пройдена без супер-сил" />
-                    </ToolsComponent>
-                  ) : (
-                    <img className={styles.iconBtn} src={iconCardPlus} alt="Суперсилы использовались" />
-                  )}
-                </div>
                 <div>
                   {Math.trunc(leader.time / 60)
                     .toString()

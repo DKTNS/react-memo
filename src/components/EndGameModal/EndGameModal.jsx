@@ -8,7 +8,7 @@ import { addLeaders } from "../../api";
 
 export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
   //const title = isWon ? "Вы победили!" : "Вы проиграли!"; -изменно
-  const { isGameMode } = useParams();
+
   const { pairsCount } = useParams();
 
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   });
   //если isGameMode true то в userData.achievements нужно добавить 1
 
-  console.log(isGameMode);
   const handleInputChange = e => {
     const { name, value } = e.target; // Извлекаем имя поля и его значение
 
@@ -89,9 +88,9 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
       {pairsCount === "9" && isWon ? (
         <>
           <Button onClick={handleAddUserButton}>Начать сначала</Button>
-          <div onClick={handleAddUser} className={styles.leaderBoardLink}>
+          <Button onClick={handleAddUser} className={styles.leaderBoardLink}>
             Перейти к лидерборду
-          </div>
+          </Button>
         </>
       ) : (
         <>
