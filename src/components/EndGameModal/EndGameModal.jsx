@@ -2,7 +2,7 @@ import styles from "./EndGameModal.module.css";
 import { Button } from "../Button/Button";
 import deadImageUrl from "./images/dead.png";
 import celebrationImageUrl from "./images/celebration.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { addLeaders } from "../../api";
 
@@ -88,9 +88,9 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
       {pairsCount === "9" && isWon ? (
         <>
           <Button onClick={handleAddUserButton}>Начать сначала</Button>
-          <Button onClick={handleAddUser} className={styles.leaderBoardLink}>
+          <Link onClick={handleAddUser} className={styles.leaderBoardLinkBox}>
             Перейти к лидерборду
-          </Button>
+          </Link>
         </>
       ) : (
         <>
