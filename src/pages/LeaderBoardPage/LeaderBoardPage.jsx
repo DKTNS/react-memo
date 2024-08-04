@@ -39,7 +39,7 @@ export function LeaderBoardPage() {
               <li className={styles.leadersItem} key={leader.id}>
                 <div className={styles.numberBox}># {i++}</div>
                 <div className={styles.nameBox}>{leader.name}</div>
-                <div>
+                <div className={styles.timeBox}>
                   {Math.trunc(leader.time / 60)
                     .toString()
                     .padStart("2", "0")}

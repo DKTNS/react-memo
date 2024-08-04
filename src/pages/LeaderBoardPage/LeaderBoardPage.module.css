@@ -5,6 +5,9 @@
 
 .container {
   padding: 40px;
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-top: 15%;
 }
 
 .header {
@@ -64,11 +67,14 @@
   cursor: pointer;
 }
 .nameBox {
-  display: block;
   /* min-width: 150px; */
   /* max-width: 150px; */
   overflow-wrap: break-word;
   white-space: normal;
+  min-width: 300px;
+  display: flex;
+  align-items:start;
+
 }
 .numberBox {
   display: block;
@@ -76,7 +82,18 @@
   max-width: 70px;
   overflow-wrap: break-word;
   white-space: normal;
+  margin-right: 25%;
+  
 }
+
+.timeBox{
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2%;
+  
+}
+
 .achivBox {
   display: flex;
   flex-direction: row;
