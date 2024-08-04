@@ -8,8 +8,9 @@ import { addLeaders } from "../../api";
 
 export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
   //const title = isWon ? "Вы победили!" : "Вы проиграли!"; -изменно
-
+  const maxLevel = 9; // Переменная для числа
   const { pairsCount } = useParams();
+  const isMaxLevel = pairsCount === maxLevel; // Переменная для условия
 
   const navigate = useNavigate();
   const gameSeconds = gameDurationMinutes * 60 + gameDurationSeconds;
@@ -51,11 +52,13 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   }
 
   let title = "";
-  if (pairsCount === "9") {
+  if (isMaxLevel) {
+    // Используем переменную вместо условия
     title = isWon ? "Вы попали на лидерборд!" : "Вы проиграли!";
   } else {
     title = isWon ? "Вы победили!" : "Вы проиграли!";
   }
+
   const startTheGame = e => {
     e.preventDefault();
     navigate(`/`);
@@ -68,7 +71,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     <div className={styles.modal}>
       <img className={styles.image} src={imgSrc} alt={imgAlt} />
       <h2 className={styles.title}>{title}</h2>
-      {pairsCount === "9" && isWon ? (
+      {isMaxLevel && isWon ? (
         <form className={styles.form}>
           <input
             className={styles.nameInput}
@@ -85,7 +88,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
       <div className={styles.time}>
         {gameDurationMinutes.toString().padStart("2", "0")}.{gameDurationSeconds.toString().padStart("2", "0")}
       </div>
-      {pairsCount === "9" && isWon ? (
+      {isMaxLevel && isWon ? (
         <>
           <Button onClick={handleAddUserButton}>Начать сначала</Button>
           <Link onClick={handleAddUser} className={styles.leaderBoardLinkBox}>
