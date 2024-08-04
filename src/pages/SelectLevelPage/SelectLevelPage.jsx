@@ -1,21 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
-
-import { useState } from "react";
+import { useContext } from "react";
 import styles from "../SelectLevelPage/SelectLevelPage.module.css";
+import { GameContext } from "../../components/Context/Context";
 
 export function SelectLevelPage() {
-  //отслеживания режима игры
-  const [checked, setChecked] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState(null); // Состояние для хранения выбранного уровня
+  //Выбор легкого-сложного режима через контекст
+  const { selectedLevel, setSelectedLevel, isEasyMode, setIsEasyMode } = useContext(GameContext); // Состояние для хранения выбранного уровня
+  //const [checked, setChecked] = useState(false); //отслеживания режима игры
   const navigate = useNavigate(); // Хук для навигации
-
   const handleStartGame = () => {
     if (selectedLevel !== null) {
-      navigate(`/game/${selectedLevel}/${checked ? true : false}`); // Переход на страницу игры с выбранным уровнем
+      navigate(`/game/${selectedLevel}/${isEasyMode ? true : false}`);
+      //navigate(`/game/${selectedLevel}/${checked ? true : false}`); // Переход на страницу игры с выбранным уровнем
     } else {
       alert("Пожалуйста, выберите уровень!"); // Предупреждение, если уровень не выбран
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
@@ -59,9 +60,9 @@ export function SelectLevelPage() {
           <input
             className={styles.custom}
             type="checkbox"
-            checked={checked}
+            checked={isEasyMode}
             value="yes"
-            onChange={() => setChecked(!checked)}
+            onChange={() => setIsEasyMode(!isEasyMode)} // переключалка режима игры при каждом изменении
             id="easyMode"
           />
           <label htmlFor="easyMode">Легкий режим (3 попытки)</label>
