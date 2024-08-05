@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import styles from "../SelectLevelPage/SelectLevelPage.module.css";
-import { GameContext } from "../../components/Context/Context";
+import { EasyModeContext } from "../../components/Context/Context";
 
 export function SelectLevelPage() {
   //Выбор легкого-сложного режима через контекст
-  const { selectedLevel, setSelectedLevel } = useContext(GameContext); // Состояние для хранения выбранного уровня
+  const { selectedLevel, setSelectedLevel } = useContext(EasyModeContext); // Состояние для хранения выбранного уровня
   const [isEasyMode, setIsEasyMode] = useState(false); // Локальное состояние для отслеживания режима игры
   //const [checked, setChecked] = useState(false); //отслеживания режима игры
   const navigate = useNavigate(); // Хук для навигации
