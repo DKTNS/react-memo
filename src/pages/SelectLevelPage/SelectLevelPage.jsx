@@ -16,6 +16,7 @@ export function SelectLevelPage() {
   };
   const { isEasyMode, setIsEasyMode } = useContext(EasyModeContext);
   const navigate = useNavigate();
+  console.log(isEasyMode);
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
