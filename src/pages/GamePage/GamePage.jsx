@@ -1,13 +1,22 @@
 import { useParams } from "react-router-dom";
-
 import { Cards } from "../../components/Cards/Cards";
+import { useContext } from "react";
+import { EasyModeContext } from "../../components/Context/easyMode";
 
 export function GamePage() {
   const { pairsCount } = useParams();
-  const { isGameMode } = useParams();
+  //const { isGameMode } = useParams();
+
+  const { isEasyMode } = useContext(EasyModeContext);
+  const attempts = isEasyMode ? 3 : 1;
   return (
     <>
-      <Cards pairsCount={parseInt(pairsCount, 10)} previewSeconds={5} isGameMode={isGameMode}></Cards>
+      <Cards
+        pairsCount={parseInt(pairsCount, 10)}
+        previewSeconds={5}
+        attempts={attempts}
+        /* isGameMode={isEasyMode} */
+      ></Cards>
     </>
   );
 }

@@ -1,9 +1,11 @@
 import { createContext, useState } from "react";
 
-export const EasyModeContext = createContext();
+export const SelectLevelContext = createContext();
 
-export const GameProvider = ({ children }) => {
+export const SelectLevelProvider = ({ children }) => {
   const [selectedLevel, setSelectedLevel] = useState(null);
 
-  return <EasyModeContext.Provider value={{ selectedLevel, setSelectedLevel }}>{children}</EasyModeContext.Provider>;
+  return (
+    <SelectLevelContext.Provider value={{ selectedLevel, setSelectedLevel }}>{children}</SelectLevelContext.Provider>
+  );
 };

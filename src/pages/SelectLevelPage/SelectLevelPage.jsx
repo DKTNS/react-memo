@@ -1,18 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styles from "../SelectLevelPage/SelectLevelPage.module.css";
-import { EasyModeContext } from "../../components/Context/Context";
+import { EasyModeContext } from "../../components/Context/easyMode";
+import { SelectLevelContext } from "../../components/Context/Context";
 
 export function SelectLevelPage() {
   //Выбор легкого-сложного режима через контекст
-  const { selectedLevel, setSelectedLevel } = useContext(EasyModeContext); // Состояние для хранения выбранного уровня
-  const [isEasyMode, setIsEasyMode] = useState(false); // Локальное состояние для отслеживания режима игры
-  //const [checked, setChecked] = useState(false); //отслеживания режима игры
-  const navigate = useNavigate(); // Хук для навигации
+  const { selectedLevel, setSelectedLevel } = useContext(SelectLevelContext);
+  const { isEasyMode, setIsEasyMode } = useContext(EasyModeContext);
+  const navigate = useNavigate();
   const handleStartGame = () => {
     if (selectedLevel !== null) {
-      navigate(`/game/${selectedLevel}/${isEasyMode ? true : false}`);
-      //navigate(`/game/${selectedLevel}/${checked ? true : false}`); // Переход на страницу игры с выбранным уровнем
+      navigate(`/game/${selectedLevel}`);
     } else {
       alert("Пожалуйста, выберите уровень!"); // Предупреждение, если уровень не выбран
     }
@@ -30,9 +29,6 @@ export function SelectLevelPage() {
             >
               1
             </Link>
-            {/* <Link className={styles.levelLink} to={`/game/3/${checked ? true : false}`}>
-              1
-            </Link> */}
           </li>
           <li className={styles.level}>
             <Link
@@ -41,9 +37,6 @@ export function SelectLevelPage() {
             >
               2
             </Link>
-            {/* <Link className={styles.levelLink} to={`/game/6/${checked ? true : false}`}>
-              2
-            </Link> */}
           </li>
           <li className={styles.level}>
             <Link
@@ -52,9 +45,6 @@ export function SelectLevelPage() {
             >
               3
             </Link>
-            {/* <Link className={styles.levelLink} to={`/game/9/${checked ? true : false}`}>
-              3
-            </Link> */}
           </li>
         </ul>
         <div className={styles.easyMode}>
@@ -64,9 +54,9 @@ export function SelectLevelPage() {
             checked={isEasyMode}
             value="yes"
             onChange={() => setIsEasyMode(!isEasyMode)} // переключалка режима игры при каждом изменении
-            id="easyMode"
+            id="isEasyMode"
           />
-          <label htmlFor="easyMode">Легкий режим (3 попытки)</label>
+          <label htmlFor="isEasyMode">Легкий режим (3 попытки)</label>
         </div>
         <button className={styles.button} onClick={handleStartGame}>
           Начать игру

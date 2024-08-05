@@ -42,7 +42,7 @@ function getTimerValue(startDate, endDate) {
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
+export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode, attempts }) {
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   // Текущий статус игры
@@ -60,7 +60,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode }) {
   });
 
   // Стейт для счетчика попыток
-  const [numberOfAttempts, setNumberOfAttempts] = useState(2);
+  const [numberOfAttempts, setNumberOfAttempts] = useState(attempts);
 
   const [achievements, setAchievements] = useState([]);
 
