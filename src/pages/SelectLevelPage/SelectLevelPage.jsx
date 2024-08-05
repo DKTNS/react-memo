@@ -5,8 +5,7 @@ import { EasyModeContext } from "../../components/Context/easyMode";
 
 export function SelectLevelPage() {
   //Выбор легкого-сложного режима через контекст
-  const { isEasyMode, setIsEasyMode } = useContext(EasyModeContext);
-  const navigate = useNavigate();
+
   const [selectedLevel, setSelectedLevel] = useState(null); // добавлено состояние selectedLevel
   const handleStartGame = () => {
     if (selectedLevel !== null) {
@@ -15,7 +14,8 @@ export function SelectLevelPage() {
       alert("Пожалуйста, выберите уровень!"); // Предупреждение, если уровень не выбран
     }
   };
-
+  const { isEasyMode, setIsEasyMode } = useContext(EasyModeContext);
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.modal}>

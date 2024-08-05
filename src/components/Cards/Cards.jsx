@@ -42,7 +42,7 @@ function getTimerValue(startDate, endDate) {
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode, attempts }) {
+export function Cards({ pairsCount = 3, previewSeconds = 5, isEasyMode, attempts }) {
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   // Текущий статус игры
@@ -140,7 +140,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode, attempts
     const playerLost = openCardsWithoutPair.length >= 2;
 
     // ... игра продолжается
-    if (isGameMode === "true") {
+    if (isEasyMode === "true") {
       if (playerLost) {
         minusOneAttempt();
         if (numberOfAttempts < 1) {
@@ -217,10 +217,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode, attempts
   }, [gameStartDate, gameEndDate]);
   //Отслеживание состояния использования ачивки
   useEffect(() => {
-    if (!isGameMode) {
+    if (!isEasyMode) {
       setAchievements(prevState => [...prevState, 1]);
     }
-  }, [isGameMode]);
+  }, [isEasyMode]);
 
   return (
     <div className={styles.container}>
@@ -247,7 +247,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode, attempts
         </div>
         {status === STATUS_IN_PROGRESS ? (
           <>
-            {isGameMode === "true" ? (
+            {isEasyMode === "true" ? (
               <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
             ) : null}
             <ToolsComponent text={"Алохомора! Открывается случайная пара карт."} customClass={styles.toolsCustom}>
@@ -277,7 +277,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isGameMode, attempts
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
-            isGameMode={isGameMode}
+            isEasyMode={isEasyMode}
           />
         </div>
       ) : null}

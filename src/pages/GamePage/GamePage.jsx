@@ -5,7 +5,7 @@ import { EasyModeContext } from "../../components/Context/easyMode";
 
 export function GamePage() {
   const { pairsCount } = useParams();
-  //const { isGameMode } = useParams();
+  //const { isEasyMode } = useParams();
 
   const { isEasyMode } = useContext(EasyModeContext);
   const attempts = isEasyMode ? 3 : 1;
@@ -15,7 +15,7 @@ export function GamePage() {
         pairsCount={parseInt(pairsCount, 10)}
         previewSeconds={5}
         attempts={attempts}
-        /* isGameMode={isEasyMode} */
+        isEasyMode={isEasyMode}
       ></Cards>
     </>
   );

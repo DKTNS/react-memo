@@ -19,7 +19,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     time: gameSeconds,
     achievements: [],
   });
-  //если isGameMode true то в userData.achievements нужно добавить 1
+  //если isEasyMode true то в userData.achievements нужно добавить 1
 
   const handleInputChange = e => {
     const { name, value } = e.target; // Извлекаем имя поля и его значение
