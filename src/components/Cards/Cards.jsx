@@ -140,7 +140,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasyMode, attempts
     const playerLost = openCardsWithoutPair.length >= 2;
 
     // ... игра продолжается
-    if (isEasyMode === "true") {
+    if (isEasyMode) {
       if (playerLost) {
         minusOneAttempt();
         if (numberOfAttempts < 1) {
@@ -247,9 +247,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isEasyMode, attempts
         </div>
         {status === STATUS_IN_PROGRESS ? (
           <>
-            {isEasyMode === "true" ? (
-              <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts + 1} </div>
-            ) : null}
+            {isEasyMode ? <div className={styles.attemptСounter}>осталось попыток: {numberOfAttempts} </div> : null}
             <ToolsComponent text={"Алохомора! Открывается случайная пара карт."} customClass={styles.toolsCustom}>
               <img className={styles.iconBtn} src={CardsIcon} alt="Открыть пару карточек" onClick={alohomora} />
             </ToolsComponent>
